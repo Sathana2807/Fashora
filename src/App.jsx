@@ -15,19 +15,21 @@ import Login from './Login'
 
 function App() {
 
+  const base = import.meta.env.BASE_URL
+
   const banners = [
     {
-      image: '/assets/womens_accessories.webp',
+      image: `${base}assets/womens_accessories.webp`,
       title: "WOMEN'S ACCESSORIES",
       text: 'Complete Your Look'
     },
     {
-      image: '/assets/gym_essentials.webp',
-      title: 'SHOES',
+      image: `${base}assets/gym_essentials.webp`,
+      title: 'GYM ESSENTIALS',
       text: 'Train. Move. Repeat.'
     },
     {
-      image: '/assets/mens-style.webp',
+      image: `${base}assets/mens-style.webp`,
       title: "MEN'S STYLE",
       text: 'Classic Looks, Modern Vibes'
     }
@@ -132,7 +134,7 @@ function App() {
   const wishlistCount = wishlist.length
 
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="/Fashora">
       <Routes>
 
         <Route
@@ -173,12 +175,18 @@ function App() {
                       <div className="hero-text">
                         <h1>{banner.title}</h1>
                         <p>{banner.text}</p>
+
                         <button
-                        className="btn btn-dark px-4 py-2"
-                        onClick={() => 
-                        document.getElementById('products').scrollIntoView({ behavior: 'smooth' })}
+                          className="btn btn-dark px-4 py-2"
+                          onClick={() =>
+                            document
+                              .getElementById('products')
+                              .scrollIntoView({
+                                behavior: 'smooth'
+                              })
+                          }
                         >
-                        SHOP NOW
+                          SHOP NOW
                         </button>
                       </div>
 
@@ -210,7 +218,7 @@ function App() {
 
               <section className="diwali-banner">
                 <img
-                  src="/assets/diwali5.jpeg"
+                  src={`${base}assets/diwali5.jpeg`}
                   alt="Diwali Sale"
                 />
               </section>
@@ -253,7 +261,7 @@ function App() {
         <Route
           path="/login"
           element={<Login />}
-          />
+        />
 
       </Routes>
     </BrowserRouter>

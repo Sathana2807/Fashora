@@ -1,10 +1,13 @@
 import React from 'react'
 
 function StyleInspiration() {
+
+  const base = import.meta.env.BASE_URL
+
   return (
     <section className="style-inspiration">
       <img
-        src="/assets/stylebanner1.jpg"
+        src={`${base}assets/stylebanner1.jpg`}
         alt="Style Inspiration"
       />
 

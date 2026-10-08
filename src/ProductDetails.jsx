@@ -1,10 +1,9 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import Navbar from './Navbar'
 import Footer from './Footer'
 
 function ProductDetails({
-  addToCart,
   cart,
   cartCount,
   increaseQuantity,
@@ -16,10 +15,11 @@ function ProductDetails({
   wishlist,
   wishlistCount,
   toggleWishlist,
-  isInWishlist
+  addToCart
 }) {
   const { id } = useParams()
   const navigate = useNavigate()
+  const base = import.meta.env.BASE_URL
 
   const products = [
     {
@@ -28,50 +28,11 @@ function ProductDetails({
       price: 999,
       oldPrice: 1499,
       discount: '33% OFF',
-      image: '/assets/girldress1.jpg',
+      image: `${base}assets/girldress1.jpg`,
       category: 'Women',
       rating: 4.5,
       reviews: 128,
-      description: 'A stylish floral dress designed for a comfortable and elegant look. Perfect for casual outings and special occasions.',
-      sizes: ['S', 'M', 'L', 'XL']
-    },
-    {
-      id: 5,
-      name: 'Women Kurti',
-      price: 799,
-      oldPrice: 1199,
-      discount: '33% OFF',
-      image: '/assets/kurti1.jpg',
-      category: 'Women',
-      rating: 4.4,
-      reviews: 86,
-      description: 'A comfortable and stylish kurti with a modern design. Perfect for everyday wear and casual occasions.',
-      sizes: ['S', 'M', 'L', 'XL']
-    },
-    {
-      id: 6,
-      name: 'Women Saree',
-      price: 1299,
-      oldPrice: 1799,
-      discount: '28% OFF',
-      image: '/assets/saree1.jpg',
-      category: 'Women',
-      rating: 4.6,
-      reviews: 104,
-      description: 'An elegant saree designed with a beautiful look and comfortable fabric. Suitable for special occasions.',
-      sizes: ['Free Size']
-    },
-    {
-      id: 7,
-      name: 'Women Top',
-      price: 599,
-      oldPrice: 899,
-      discount: '33% OFF',
-      image: '/assets/top1.jpg',
-      category: 'Women',
-      rating: 4.3,
-      reviews: 72,
-      description: 'A trendy women top designed for a comfortable and stylish everyday look.',
+      description: 'Elegant floral dress designed for a stylish and comfortable look.',
       sizes: ['S', 'M', 'L', 'XL']
     },
     {
@@ -80,51 +41,12 @@ function ProductDetails({
       price: 699,
       oldPrice: 999,
       discount: '30% OFF',
-      image: '/assets/menshirt1.png',
+      image: `${base}assets/menshirt1.png`,
       category: 'Men',
       rating: 4.4,
       reviews: 96,
-      description: 'A comfortable and stylish men shirt with a modern design. Perfect for casual and everyday wear.',
-      sizes: ['S', 'M', 'L', 'XL']
-    },
-    {
-      id: 8,
-      name: 'Men T-Shirt',
-      price: 499,
-      oldPrice: 799,
-      discount: '37% OFF',
-      image: '/assets/tshirt1.jpg',
-      category: 'Men',
-      rating: 4.3,
-      reviews: 82,
-      description: 'A comfortable men t-shirt with a simple and modern style. Perfect for everyday use.',
-      sizes: ['S', 'M', 'L', 'XL']
-    },
-    {
-      id: 9,
-      name: 'Men Jeans',
-      price: 1199,
-      oldPrice: 1699,
-      discount: '29% OFF',
-      image: '/assets/pant1.jpg',
-      category: 'Men',
-      rating: 4.5,
-      reviews: 118,
-      description: 'Stylish and comfortable jeans designed for everyday wear with a modern fit.',
-      sizes: ['30', '32', '34', '36']
-    },
-    {
-      id: 10,
-      name: 'Men Jacket',
-      price: 1499,
-      oldPrice: 2199,
-      discount: '32% OFF',
-      image: '/assets/jacket1.jpg',
-      category: 'Men',
-      rating: 4.6,
-      reviews: 91,
-      description: 'A stylish jacket designed to give a modern and comfortable look.',
-      sizes: ['S', 'M', 'L', 'XL']
+      description: 'Classic casual shirt with a comfortable fit for everyday wear.',
+      sizes: ['S', 'M', 'L', 'XL', 'XXL']
     },
     {
       id: 3,
@@ -132,50 +54,11 @@ function ProductDetails({
       price: 1299,
       oldPrice: 1799,
       discount: '28% OFF',
-      image: '/assets/shose.webp',
+      image: `${base}assets/shose.webp`,
       category: 'Shoes',
       rating: 4.6,
       reviews: 154,
-      description: 'Comfortable casual shoes designed for everyday use. Lightweight and easy to pair with different outfits.',
-      sizes: ['6', '7', '8', '9', '10']
-    },
-    {
-      id: 11,
-      name: 'Running Shoes',
-      price: 1599,
-      oldPrice: 2199,
-      discount: '27% OFF',
-      image: '/assets/running1.jpg',
-      category: 'Shoes',
-      rating: 4.5,
-      reviews: 132,
-      description: 'Comfortable running shoes designed for daily activities, walking and workouts.',
-      sizes: ['6', '7', '8', '9', '10']
-    },
-    {
-      id: 12,
-      name: 'Sports Shoes',
-      price: 1399,
-      oldPrice: 1999,
-      discount: '30% OFF',
-      image: '/assets/sports1.jpg',
-      category: 'Shoes',
-      rating: 4.4,
-      reviews: 109,
-      description: 'Lightweight sports shoes designed for comfort and everyday active use.',
-      sizes: ['6', '7', '8', '9', '10']
-    },
-    {
-      id: 13,
-      name: 'Sneakers',
-      price: 1799,
-      oldPrice: 2499,
-      discount: '28% OFF',
-      image: '/assets/sneaker1.jpg',
-      category: 'Shoes',
-      rating: 4.7,
-      reviews: 145,
-      description: 'Modern sneakers with a stylish design and comfortable fit for everyday outfits.',
+      description: 'Comfortable casual shoes suitable for everyday activities and outings.',
       sizes: ['6', '7', '8', '9', '10']
     },
     {
@@ -184,11 +67,129 @@ function ProductDetails({
       price: 899,
       oldPrice: 1299,
       discount: '31% OFF',
-      image: '/assets/handbag2.webp',
+      image: `${base}assets/handbag2.webp`,
       category: 'Accessories',
+      rating: 4.5,
+      reviews: 87,
+      description: 'Stylish handbag with a spacious design for your everyday essentials.',
+      sizes: ['Free Size']
+    },
+    {
+      id: 5,
+      name: 'Women Kurti',
+      price: 799,
+      oldPrice: 1199,
+      discount: '33% OFF',
+      image: `${base}assets/kurti1.jpg`,
+      category: 'Women',
+      rating: 4.3,
+      reviews: 74,
+      description: 'Beautiful kurti with a comfortable design perfect for casual occasions.',
+      sizes: ['S', 'M', 'L', 'XL']
+    },
+    {
+      id: 6,
+      name: 'Women Saree',
+      price: 1299,
+      oldPrice: 1799,
+      discount: '28% OFF',
+      image: `${base}assets/saree1.jpg`,
+      category: 'Women',
       rating: 4.7,
       reviews: 112,
-      description: 'A stylish and spacious handbag suitable for everyday use. Designed to match both casual and elegant outfits.'
+      description: 'Elegant saree designed to give you a graceful and stylish appearance.',
+      sizes: ['Free Size']
+    },
+    {
+      id: 7,
+      name: 'Women Top',
+      price: 599,
+      oldPrice: 899,
+      discount: '33% OFF',
+      image: `${base}assets/top1.jpg`,
+      category: 'Women',
+      rating: 4.2,
+      reviews: 63,
+      description: 'Trendy women top with a comfortable fit for everyday styling.',
+      sizes: ['S', 'M', 'L', 'XL']
+    },
+    {
+      id: 8,
+      name: 'Men T-Shirt',
+      price: 499,
+      oldPrice: 799,
+      discount: '38% OFF',
+      image: `${base}assets/tshirt1.jpg`,
+      category: 'Men',
+      rating: 4.4,
+      reviews: 91,
+      description: 'Comfortable casual t-shirt made for everyday wear.',
+      sizes: ['S', 'M', 'L', 'XL', 'XXL']
+    },
+    {
+      id: 9,
+      name: 'Men Jeans',
+      price: 1199,
+      oldPrice: 1699,
+      discount: '29% OFF',
+      image: `${base}assets/pant1.jpg`,
+      category: 'Men',
+      rating: 4.5,
+      reviews: 105,
+      description: 'Classic jeans with a comfortable fit and stylish everyday look.',
+      sizes: ['30', '32', '34', '36', '38']
+    },
+    {
+      id: 10,
+      name: 'Men Jacket',
+      price: 1499,
+      oldPrice: 2199,
+      discount: '32% OFF',
+      image: `${base}assets/jacket1.jpg`,
+      category: 'Men',
+      rating: 4.6,
+      reviews: 78,
+      description: 'Stylish jacket designed for a modern and comfortable look.',
+      sizes: ['S', 'M', 'L', 'XL', 'XXL']
+    },
+    {
+      id: 11,
+      name: 'Running Shoes',
+      price: 1599,
+      oldPrice: 2299,
+      discount: '30% OFF',
+      image: `${base}assets/running1.jpg`,
+      category: 'Shoes',
+      rating: 4.7,
+      reviews: 134,
+      description: 'Lightweight running shoes designed for comfort and active movement.',
+      sizes: ['6', '7', '8', '9', '10']
+    },
+    {
+      id: 12,
+      name: 'Sports Shoes',
+      price: 1399,
+      oldPrice: 1999,
+      discount: '30% OFF',
+      image: `${base}assets/sports1.jpg`,
+      category: 'Shoes',
+      rating: 4.5,
+      reviews: 101,
+      description: 'Comfortable sports shoes suitable for workouts and daily activities.',
+      sizes: ['6', '7', '8', '9', '10']
+    },
+    {
+      id: 13,
+      name: 'Sneakers',
+      price: 1799,
+      oldPrice: 2499,
+      discount: '28% OFF',
+      image: `${base}assets/sneaker1.jpg`,
+      category: 'Shoes',
+      rating: 4.8,
+      reviews: 143,
+      description: 'Trendy sneakers combining comfort and modern fashion.',
+      sizes: ['6', '7', '8', '9', '10']
     },
     {
       id: 14,
@@ -196,11 +197,12 @@ function ProductDetails({
       price: 1099,
       oldPrice: 1599,
       discount: '31% OFF',
-      image: '/assets/handbags1.jpg',
+      image: `${base}assets/handbags1.jpg`,
       category: 'Accessories',
-      rating: 4.5,
-      reviews: 94,
-      description: 'A stylish ladies handbag with enough space for everyday essentials.'
+      rating: 4.4,
+      reviews: 89,
+      description: 'Elegant ladies handbag with enough space for daily essentials.',
+      sizes: ['Free Size']
     },
     {
       id: 15,
@@ -208,11 +210,12 @@ function ProductDetails({
       price: 599,
       oldPrice: 899,
       discount: '33% OFF',
-      image: '/assets/sunglasses1.jpg',
+      image: `${base}assets/sunglasses1.jpg`,
       category: 'Accessories',
-      rating: 4.4,
-      reviews: 78,
-      description: 'Stylish sunglasses designed to complete your everyday fashion look.'
+      rating: 4.3,
+      reviews: 67,
+      description: 'Stylish sunglasses designed to complete your everyday fashion look.',
+      sizes: ['Free Size']
     },
     {
       id: 16,
@@ -220,44 +223,30 @@ function ProductDetails({
       price: 999,
       oldPrice: 1499,
       discount: '33% OFF',
-      image: '/assets/watch1.png',
+      image: `${base}assets/watch1.png`,
       category: 'Accessories',
       rating: 4.6,
-      reviews: 101,
-      description: 'A stylish watch designed to complement both casual and formal outfits.'
+      reviews: 118,
+      description: 'Classic stylish watch suitable for both casual and formal occasions.',
+      sizes: ['Free Size']
     }
   ]
 
-  const product = products.find(
-    (item) => item.id === Number(id)
+  const product = products.find(item => item.id === Number(id))
+
+  const [selectedSize, setSelectedSize] = useState(
+    product?.sizes?.[0] || ''
   )
 
-  const [selectedSize, setSelectedSize] = useState('')
   const [quantity, setQuantity] = useState(1)
 
   useEffect(() => {
     window.scrollTo(0, 0)
-
-    if (product?.sizes) {
-      setSelectedSize(product.sizes[0])
-    } else {
-      setSelectedSize('')
-    }
-
-    setQuantity(1)
   }, [id])
-
-  const increaseProductQuantity = () => {
-    setQuantity((prev) => prev + 1)
-  }
-
-  const decreaseProductQuantity = () => {
-    setQuantity((prev) => Math.max(1, prev - 1))
-  }
 
   if (!product) {
     return (
-      <>
+      <div>
         <Navbar
           cart={cart}
           cartCount={cartCount}
@@ -272,50 +261,42 @@ function ProductDetails({
           toggleWishlist={toggleWishlist}
         />
 
-        <div className="product-page">
-          <div className="product-loading">
-            <h3>Product not found</h3>
-
-            <button
-              className="btn btn-dark mt-3"
-              onClick={() => navigate('/')}
-            >
-              Back to Home
-            </button>
-          </div>
+        <div className="container text-center py-5">
+          <h2>Product Not Found</h2>
+          <button
+            className="btn btn-dark mt-3"
+            onClick={() => navigate('/')}
+          >
+            Back to Home
+          </button>
         </div>
 
         <Footer />
-      </>
+      </div>
     )
   }
 
+  const isWishlisted = wishlist?.some(item => item.id === product.id)
+
   const handleAddToCart = () => {
-    addToCart({
-      ...product,
-      selectedSize: product.sizes ? selectedSize : '',
-      quantity: quantity
-    })
+    if (addToCart) {
+      for (let i = 0; i < quantity; i++) {
+        addToCart(product)
+      }
+    }
   }
 
   const handleBuyNow = () => {
-    addToCart({
-      ...product,
-      selectedSize: product.sizes ? selectedSize : '',
-      quantity: quantity
-    })
-
+    handleAddToCart()
     navigate('/')
   }
 
   const relatedProducts = products.filter(
-    (item) =>
-      item.id !== product.id &&
-      item.category === product.category
+    item => item.category === product.category && item.id !== product.id
   )
 
   return (
-    <>
+    <div className="fashora-page">
       <Navbar
         cart={cart}
         cartCount={cartCount}
@@ -330,290 +311,311 @@ function ProductDetails({
         toggleWishlist={toggleWishlist}
       />
 
-      <div className="product-page">
-
+      <div className="container py-4">
         <button
-          className="product-back-button"
+          className="btn btn-link text-dark text-decoration-none px-0 mb-4"
           onClick={() => navigate('/')}
         >
           <i className="bi bi-arrow-left me-2"></i>
           Back to Products
         </button>
 
-        <div className="product-main">
+        <div className="row g-5">
+          <div className="col-lg-6">
+            <div
+              className="position-relative bg-light rounded-4 overflow-hidden"
+              style={{ minHeight: '550px' }}
+            >
+              <img
+                src={product.image}
+                alt={product.name}
+                className="w-100 h-100"
+                style={{
+                  objectFit: 'contain',
+                  minHeight: '550px'
+                }}
+              />
 
-          <div className="product-image-box">
-            <img
-              src={product.image}
-              alt={product.name}
-            />
+              <button
+                className="btn btn-light rounded-circle shadow position-absolute top-0 end-0 m-3"
+                onClick={() => toggleWishlist && toggleWishlist(product)}
+              >
+                <i
+                  className={`bi ${
+                    isWishlisted ? 'bi-heart-fill' : 'bi-heart'
+                  } fs-5`}
+                ></i>
+              </button>
+
+              <span className="badge bg-dark position-absolute top-0 start-0 m-3 px-3 py-2">
+                {product.discount}
+              </span>
+            </div>
           </div>
 
-          <div className="product-info">
+          <div className="col-lg-6">
+            <p className="text-muted mb-2">{product.category}</p>
 
-            <p className="product-category">
-              {product.category}
-            </p>
+            <h1 className="fw-bold mb-3">
+              {product.name}
+            </h1>
 
-            <h1>{product.name}</h1>
-
-            <div className="product-rating">
-
-              <span>
-                {'★'.repeat(Math.floor(product.rating))}
+            <div className="d-flex align-items-center gap-2 mb-3">
+              <span className="badge bg-success">
+                {product.rating} <i className="bi bi-star-fill"></i>
               </span>
 
-              <span className="review-count">
-                {product.rating} ({product.reviews} Reviews)
+              <span className="text-muted">
+                {product.reviews} Reviews
+              </span>
+            </div>
+
+            <div className="d-flex align-items-center gap-3 mb-4">
+              <h2 className="fw-bold mb-0">
+                ₹{product.price}
+              </h2>
+
+              <span className="text-muted text-decoration-line-through fs-5">
+                ₹{product.oldPrice}
               </span>
 
+              <span className="text-success fw-semibold">
+                {product.discount}
+              </span>
             </div>
 
-            <div className="product-price">
-
-              <strong>₹{product.price}</strong>
-
-              <span>₹{product.oldPrice}</span>
-
-              <b>{product.discount}</b>
-
-            </div>
-
-            <p className="product-description">
+            <p className="text-muted lh-lg mb-4">
               {product.description}
             </p>
 
-            {product.sizes && (
-              <div className="product-size">
+            <hr />
 
-                <span>Select Size</span>
-
-                <div className="size-options">
-
-                  {product.sizes.map((size) => (
-                    <button
-                      key={size}
-                      className={`size-button ${
-                        selectedSize === size ? 'active' : ''
-                      }`}
-                      onClick={() => setSelectedSize(size)}
-                    >
-                      {size}
-                    </button>
-                  ))}
-
-                </div>
-
-              </div>
-            )}
-
-            <div className="product-quantity">
-
-              <span>Quantity</span>
-
-              <div className="quantity-box">
-
-                <button
-                  onClick={decreaseProductQuantity}
-                >
-                  −
-                </button>
-
-                <span>{quantity}</span>
-
-                <button
-                  onClick={increaseProductQuantity}
-                >
-                  +
-                </button>
-
+            <div className="mb-4">
+              <div className="d-flex justify-content-between align-items-center mb-2">
+                <strong>Select Size</strong>
+                <span className="text-muted">
+                  Size Guide
+                </span>
               </div>
 
+              <div className="d-flex flex-wrap gap-2">
+                {product.sizes.map(size => (
+                  <button
+                    key={size}
+                    className={`btn ${
+                      selectedSize === size
+                        ? 'btn-dark'
+                        : 'btn-outline-dark'
+                    }`}
+                    onClick={() => setSelectedSize(size)}
+                  >
+                    {size}
+                  </button>
+                ))}
+              </div>
             </div>
 
-            <div className="product-actions">
+            <div className="mb-4">
+              <strong className="d-block mb-2">
+                Quantity
+              </strong>
 
+              <div
+                className="d-flex align-items-center border rounded"
+                style={{ width: '140px' }}
+              >
+                <button
+                  className="btn border-0"
+                  onClick={() =>
+                    setQuantity(prev => Math.max(1, prev - 1))
+                  }
+                >
+                  <i className="bi bi-dash"></i>
+                </button>
+
+                <span className="flex-grow-1 text-center fw-semibold">
+                  {quantity}
+                </span>
+
+                <button
+                  className="btn border-0"
+                  onClick={() =>
+                    setQuantity(prev => prev + 1)
+                  }
+                >
+                  <i className="bi bi-plus"></i>
+                </button>
+              </div>
+            </div>
+
+            <div className="d-flex gap-3 mb-4">
               <button
-                className="add-cart-button"
+                className="btn btn-dark btn-lg flex-grow-1"
                 onClick={handleAddToCart}
               >
-                <i className="bi bi-cart3 me-2"></i>
+                <i className="bi bi-bag-plus me-2"></i>
                 Add to Cart
               </button>
 
               <button
-                className="buy-now-button"
+                className="btn btn-outline-dark btn-lg flex-grow-1"
                 onClick={handleBuyNow}
               >
                 Buy Now
               </button>
-
             </div>
 
-            <div className="service-info">
-
-              <div>
-                <i className="bi bi-truck"></i>
-
-                <div>
-                  <strong>Free Delivery</strong>
-                  <p>Free delivery on selected orders</p>
-                </div>
+            <div className="row g-3 mt-2">
+              <div className="col-4 text-center">
+                <i className="bi bi-truck fs-3"></i>
+                <p className="small mb-0 mt-2">
+                  Free Delivery
+                </p>
               </div>
 
-              <div>
-                <i className="bi bi-arrow-repeat"></i>
-
-                <div>
-                  <strong>Easy Returns</strong>
-                  <p>Easy return within eligible period</p>
-                </div>
+              <div className="col-4 text-center">
+                <i className="bi bi-arrow-repeat fs-3"></i>
+                <p className="small mb-0 mt-2">
+                  Easy Returns
+                </p>
               </div>
 
-              <div>
-                <i className="bi bi-shield-check"></i>
-
-                <div>
-                  <strong>Secure Payment</strong>
-                  <p>100% secure payment</p>
-                </div>
+              <div className="col-4 text-center">
+                <i className="bi bi-shield-check fs-3"></i>
+                <p className="small mb-0 mt-2">
+                  Secure Payment
+                </p>
               </div>
-
             </div>
-
           </div>
-
         </div>
 
-        <section className="product-description-section">
+        <div className="mt-5 pt-5">
+          <h3 className="fw-bold mb-4">
+            Product Details
+          </h3>
 
-          <h2>Product Details</h2>
+          <div className="row g-4">
+            <div className="col-md-6">
+              <div className="border rounded-4 p-4 h-100">
+                <h5 className="fw-bold mb-3">
+                  Product Information
+                </h5>
 
-          <p>{product.description}</p>
+                <p className="mb-2">
+                  <strong>Category:</strong> {product.category}
+                </p>
 
-          <h3>Features</h3>
+                <p className="mb-2">
+                  <strong>Rating:</strong> {product.rating} / 5
+                </p>
 
-          <ul>
-            <li>Premium quality material</li>
-            <li>Comfortable for everyday use</li>
-            <li>Modern and stylish design</li>
-            <li>Suitable for different occasions</li>
-          </ul>
-
-        </section>
-
-        <section className="reviews-section">
-
-          <h2>Customer Reviews</h2>
-
-          <div className="overall-rating">
-
-            <div className="rating-number">
-
-              <strong>{product.rating}</strong>
-
-              <span>★★★★★</span>
-
-              <p>
-                Based on {product.reviews} customer reviews
-              </p>
-
+                <p className="mb-0">
+                  <strong>Available Sizes:</strong>{' '}
+                  {product.sizes.join(', ')}
+                </p>
+              </div>
             </div>
 
+            <div className="col-md-6">
+              <div className="border rounded-4 p-4 h-100">
+                <h5 className="fw-bold mb-3">
+                  Why You'll Love It
+                </h5>
+
+                <p className="text-muted mb-0 lh-lg">
+                  Designed with style, comfort and everyday usability
+                  in mind. This product is a great addition to your
+                  Fashora collection.
+                </p>
+              </div>
+            </div>
           </div>
+        </div>
 
-          <div className="review-card">
+        <div className="mt-5 pt-4">
+          <h3 className="fw-bold mb-4">
+            Customer Reviews
+          </h3>
 
-            <div className="review-header">
-              <strong>Priya</strong>
-              <span>★★★★★</span>
+          <div className="border rounded-4 p-4">
+            <div className="d-flex align-items-center gap-2 mb-2">
+              <span className="badge bg-success">
+                {product.rating} <i className="bi bi-star-fill"></i>
+              </span>
+
+              <strong>
+                {product.reviews} Reviews
+              </strong>
             </div>
 
-            <h4>Good quality</h4>
-
-            <p>
-              Product quality is good and the design looks very nice.
+            <p className="text-muted mb-0">
+              Customers love the quality, comfort and stylish design
+              of this product.
             </p>
-
           </div>
-
-          <div className="review-card">
-
-            <div className="review-header">
-              <strong>Divya</strong>
-              <span>★★★★☆</span>
-            </div>
-
-            <h4>Worth buying</h4>
-
-            <p>
-              Comfortable product and delivery was also good.
-            </p>
-
-          </div>
-
-        </section>
+        </div>
 
         {relatedProducts.length > 0 && (
-          <section className="related-products">
+          <div className="mt-5 pt-4">
+            <h3 className="fw-bold mb-4">
+              Related Products
+            </h3>
 
-            <h2>You May Also Like</h2>
-
-            <div className="related-grid">
-
-              {relatedProducts.map((item) => (
+            <div className="row g-4">
+              {relatedProducts.map(item => (
                 <div
-                  className="related-card"
+                  className="col-6 col-md-4 col-lg-3"
                   key={item.id}
-                  onClick={() =>
-                    navigate(`/product/${item.id}`)
-                  }
                 >
-
-                  <div className="product-image-wrapper">
-
-                    <img
-                      src={item.image}
-                      alt={item.name}
-                    />
-
-                    <button
-                      type="button"
-                      className={`wishlist-btn ${
-                        isInWishlist(item.id) ? 'active' : ''
-                      }`}
-                      onClick={(e) => {
-                        e.stopPropagation()
-                        toggleWishlist(item)
-                      }}
+                  <div
+                    className="card border-0 shadow-sm h-100"
+                    style={{ cursor: 'pointer' }}
+                    onClick={() =>
+                      navigate(`/product/${item.id}`)
+                    }
+                  >
+                    <div
+                      className="bg-light rounded-top overflow-hidden"
+                      style={{ height: '260px' }}
                     >
-                      <i
-                        className={
-                          isInWishlist(item.id)
-                            ? 'bi bi-heart-fill'
-                            : 'bi bi-heart'
-                        }
-                      ></i>
-                    </button>
+                      <img
+                        src={item.image}
+                        alt={item.name}
+                        className="w-100 h-100"
+                        style={{ objectFit: 'cover' }}
+                      />
+                    </div>
 
+                    <div className="card-body">
+                      <p className="text-muted small mb-1">
+                        {item.category}
+                      </p>
+
+                      <h6 className="fw-semibold">
+                        {item.name}
+                      </h6>
+
+                      <div className="d-flex align-items-center gap-2">
+                        <strong>
+                          ₹{item.price}
+                        </strong>
+
+                        <span className="text-muted text-decoration-line-through small">
+                          ₹{item.oldPrice}
+                        </span>
+                      </div>
+                    </div>
                   </div>
-
-                  <h4>{item.name}</h4>
-
-                  <p>₹{item.price}</p>
-
                 </div>
               ))}
-
             </div>
-
-          </section>
+          </div>
         )}
-
       </div>
 
       <Footer />
-    </>
+    </div>
   )
 }
 

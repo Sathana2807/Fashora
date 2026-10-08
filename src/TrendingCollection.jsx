@@ -1,19 +1,22 @@
 import React from 'react'
 
 function TrendingCollection() {
+
+  const base = import.meta.env.BASE_URL
+
   const collections = [
     {
-      image: '/assets/trendgirl2.jpg',
+      image: `${base}assets/trendgirl2.jpg`,
       title: "Women's Edit",
       text: 'Elegant styles for every occasion'
     },
     {
-      image: '/assets/trendboy3.jpg',
+      image: `${base}assets/trendboy3.jpg`,
       title: "Men's Collection",
       text: 'Classic looks with a modern touch'
     },
     {
-      image: '/assets/trendbag1.jpg',
+      image: `${base}assets/trendbag1.jpg`,
       title: 'Active Style',
       text: 'Comfort meets everyday fashion'
     }
@@ -33,7 +36,10 @@ function TrendingCollection() {
         <div className="row g-4">
 
           {collections.map((collection, index) => (
-            <div className="col-12 col-md-4" key={index}>
+            <div
+              className="col-12 col-md-4"
+              key={index}
+            >
               <div className="trending-card">
 
                 <img
@@ -43,8 +49,12 @@ function TrendingCollection() {
 
                 <div className="trending-overlay">
                   <h3>{collection.title}</h3>
+
                   <p>{collection.text}</p>
-                  <button>EXPLORE COLLECTION</button>
+
+                  <button>
+                    EXPLORE COLLECTION
+                  </button>
                 </div>
 
               </div>
